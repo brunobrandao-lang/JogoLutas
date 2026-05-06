@@ -45,12 +45,12 @@ public class LutadoresModel {
         this.id = id;
     }
 
-    public String getNome() {
+    public String getNomeDeCombate() {
         return nomeDeCombate;
     }
 
-    public void setNome(String nome) {
-        this.nomeDeCombate = nome;
+    public void setNomeDeCombate(String nomeDeCombate) {
+        this.nomeDeCombate = nomeDeCombate;
     }
 
     public String getEspecialidades() {

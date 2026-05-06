@@ -45,16 +45,23 @@ public class CenariosService {
                 .collect(Collectors.toList());
     }
 
-    // Buscar por ID (útil para o Controller futuramente)
-    public CenariosResponseDTO buscarPorId(Long id) {
+    public void atualizar(Long id, CenariosRequestDTO dto) {
         CenariosModel cenario = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cenário não encontrado!"));
+                .orElseThrow(() -> new RuntimeException("Cenário não encontrado com o ID: " + id));
 
-        return new CenariosResponseDTO(
-                cenario.getPeriodo(),
-                cenario.getNomeCenario(),
-                cenario.getModalidade(),
-                cenario.getTipoLocal()
-        );
+        cenario.setNomeCenario(dto.getNomeCenario());
+        cenario.setModalidade(dto.getModalidade());
+        cenario.setPeriodo(dto.getPeriodo());
+        cenario.setTipoLocal(dto.getTipoLocal());
+
+        repository.save(cenario);
+    }
+
+    public void excluir(Long id) {
+        if (!repository.existsById(id)) {
+            throw new RuntimeException("Cenário não encontrado para exclusão!");
+        }
+        repository.deleteById(id);
+
     }
 }
